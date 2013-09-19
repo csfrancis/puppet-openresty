@@ -3,7 +3,7 @@ daemon off;
 user <%= scope.lookupvar "::boxen_user" %> staff;
 
 worker_processes 2;
-pid <%= scope.lookupvar "nginx::config::pidfile" %>;
+pid <%= scope.lookupvar "openresty::config::pidfile" %>;
 
 events {
   worker_connections 1024;
@@ -17,8 +17,8 @@ http {
                   '"$request" $body_bytes_sent "$http_referer" '
                   '"$http_user_agent" "http_x_forwarded_for"';
 
-  access_log <%= scope.lookupvar "nginx::config::logdir" %>/access.log main;
-  error_log  <%= scope.lookupvar "nginx::config::logdir" %>/error.log debug;
+  access_log <%= scope.lookupvar "openresty::config::logdir" %>/access.log main;
+  error_log  <%= scope.lookupvar "openresty::config::logdir" %>/error.log debug;
 
   sendfile on;
 
@@ -42,9 +42,9 @@ http {
     server_name localhost;
 
     location / {
-      root   <%= scope.lookupvar "nginx::config::configdir" %>/public;
+      root   <%= scope.lookupvar "openresty::config::configdir" %>/public;
     }
   }
 
-  include <%= scope.lookupvar "nginx::config::sitesdir" %>/*;
+  include <%= scope.lookupvar "openresty::config::sitesdir" %>/*;
 }
