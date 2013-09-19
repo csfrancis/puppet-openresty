@@ -61,7 +61,6 @@ class openresty {
     ensure  => absent,
     force   => true,
     recurse => true,
-    require => Package['boxen/brews/nginx']
   }
 
   service { 'dev.nginx':
